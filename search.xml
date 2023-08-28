@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>【置顶】git使用基础教程</title>
+    <url>/2023/04/06/git/</url>
+    <content><![CDATA[<h1 id="git使用基础教程-MAC-OS"><a href="#git使用基础教程-MAC-OS" class="headerlink" title="git使用基础教程 (MAC OS)"></a>git使用基础教程 (MAC OS)</h1><p><em>好久没更新了blog了，打算开两个坑，一个是一些使用教程，我写的大抵是不如官方文档的，所以不如就以简洁为目标x，另一个坑就是关于艺术（指歌曲）但一些文字积累。如果有第三个坑的话，可能会好好整理一些notion上存的实用资料传上来</em></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/git.md/img-20230406232809.png" alt="Img"></p>
+<p>首先放一个中文文档链接：<a class="link" href="https://git-scm.com/book/zh/v2">https://git-scm.com/book/zh/v2 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name "xxx"</span><br><span class="line">git config --global user.email "xxx@xx.com"</span><br></pre></td></tr></table></figure></div>
+
+
+<p><code>git init</code> 在空文件夹初始化<br><code>git status</code> 获取当前git状态<br><code>git remote -v</code> 查看远程仓库</p>
+<h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><p><code>git branch</code> 新建分支<br><code>git branch -v</code> 查看分支<br><code>git checkout</code> 切换分支<br><code>git merge</code> 合并分支</p>
+<p>以下分支以main为例。</p>
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p><code>git clone</code> \<a class="link" href="https://xxx.com/">https://xxx.com <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 从项目网站上获取文件</p>
+<h2 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">git fetch --all</span><br><span class="line">git reset --hard origin/main</span><br><span class="line">git pull</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m "第一次提交"</span><br><span class="line">git push origin main</span><br></pre></td></tr></table></figure></div>
+
+<p>解决<code>git push</code>操作卡顿的问题：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">全局的：git config --global sendpack.sideband false</span><br><span class="line"> </span><br><span class="line">仓库的：git config --local sendpack.sideband false</span><br></pre></td></tr></table></figure></div>
+
+
+
+<h2 id="UI操作"><a href="#UI操作" class="headerlink" title="UI操作"></a>UI操作</h2><p>贴个链接：<a class="link" href="https://www.w3cschool.cn/github/">https://www.w3cschool.cn/github/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+]]></content>
+      <tags>
+        <tag>Technology</tag>
+        <tag>Compass</tag>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【置顶】基于hexo搭建自己的github博客网站</title>
+    <url>/2023/02/26/hexoblog/</url>
+    <content><![CDATA[<h1 id="基于hexo搭建自己的github博客网站（Mac-OS系统）"><a href="#基于hexo搭建自己的github博客网站（Mac-OS系统）" class="headerlink" title="基于hexo搭建自己的github博客网站（Mac OS系统）"></a>基于hexo搭建自己的github博客网站（Mac OS系统）</h1><p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/hexoblog.md/test.png" alt="Img"></p>
+<p><em>更新说明：最近npy也想要搭建一个博客，我在帮助她debug的时候，发现了很多新手可能会遇到的问题，于是重新对教程进行完善了一番。</em></p>
+<p><em>二次说明：最近捣鼓latex公式，结果甚至把blog搞崩了，图片加载不出来，最后捣鼓了一天，就重新装了旧版本的npm，终于恢复正常了。关于更多的扩展功能，有兴趣可以自行搜索文章的置顶方法和页面支持Latex的方法。</em></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/hexoblog.md/img-20230404140515.png" alt="Img"></p>
+<h2 id="安装准备"><a href="#安装准备" class="headerlink" title="安装准备"></a>安装准备</h2><p>安装node.js与git<br>若已安装，则可检查版本</p>
+<p>（若无权限，则在开头加sudo）</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">brew install node</span><br><span class="line">brew install git</span><br><span class="line">#查看安装的版本</span><br><span class="line">node -v</span><br><span class="line">git --version</span><br></pre></td></tr></table></figure></div>
+
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/hexoblog.md/img-20230226215548.png" alt="Img"></p>
+<p>下一步安装hexo</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure></div>
+
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/hexoblog.md/img-20230226220018.png" alt="Img"></p>
+<h2 id="hexo初始化"><a href="#hexo初始化" class="headerlink" title="hexo初始化"></a>hexo初始化</h2><p>选择作为博客的空文件夹<br>在该目录下进行hexo初始化</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">mkdir blog</span><br><span class="line">cd blog</span><br><span class="line">hexo init</span><br></pre></td></tr></table></figure></div>
+
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/hexoblog.md/img-20230226220405.png" alt="Img"></p>
+<h2 id="关联github"><a href="#关联github" class="headerlink" title="关联github"></a>关联github</h2><p>注：2021年之前的教程是可以用更加简便的方法验证的<br>但后来遇上了修改，现已无法使用下图方法验证</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/hexoblog.md/img-20230226224252.png" alt="Img"></p>
+<p>本人尝试了ssh key验证的方法，也以失败告终</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/hexoblog.md/img-20230227083102.png" alt="Img"></p>
+<p>因此，可以采用一下token方法：</p>
+<p>在命令行输入配置用户名和账号的命令<br>其中 <code>username</code>是你的用户名<br><code>yourmail@qq.com</code>是你github的登录邮箱<br>如果已经配置过，该步骤可以忽略。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name "username"</span><br><span class="line">git config --global user.email "yourmail@qq.com"</span><br></pre></td></tr></table></figure></div>
+
+<p>打开github，进入个人主页<code>settings</code>-&gt;<code>Developer settings</code><br>-&gt;<code>Personal access tokens</code>-&gt;<code>Tokens(classic)</code><br>生成一个自己的token（可以全部勾选）</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/hexoblog.md/img-20230227084031.png" alt="Img"></p>
+<p>接着在跳转的页面中，会出现token，复制这行代码</p>
+<p><strong>注意，在离开这个界面后这串代码将不再可见</strong><br><strong>因此在刷新界面或者离开界面前一定复制好这串代码</strong></p>
+<p>新建仓库，名称必须为 <code>你的name</code>.github.io</p>
+<p>打开文件<code>_config.yml</code>，将最底部的代码覆盖为：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: https://你的token@github.com/你的name/你的name.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></div>
+
+<p>保存即可</p>
+<p>有一点也是github的更新问题：默认分支从以前的master换成了main。这是由于一些米国人的racial问题引发的，间接导致了计算机小白受害。因此，我们需要解决main分支和master分支的冲突。</p>
+<p>一种方法是删去其中一个，并把上面的那串代码的branch改成相应的main/branch。</p>
+<p>或者在仓库的setting中，修改默认分支，还要在<code>page</code>处确认是自己在使用的分支。</p>
+<h2 id="个性主题配置"><a href="#个性主题配置" class="headerlink" title="个性主题配置"></a>个性主题配置</h2><p>本人以使用fluid主题为例</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/hexoblog.md/img-20230226225059.png" alt="Img"></p>
+<p>用户手册：<a class="link" href="https://hexo.fluid-dev.com/docs/start/">https://hexo.fluid-dev.com/docs/start/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>在本地theme文件夹中加入下载好的fluid主题，将其文件夹名复制，在外面的<code>config_yml</code>文件中的倒数第二段“theme“改成文件夹名（可能是hexo-theme-fluid或fluid）</p>
+<p>之后的大部分主题配置在fluid文件夹的<code>config_yml</code>中配置修改，详见上述用户手册。</p>
+<h2 id="hexo基础用法"><a href="#hexo基础用法" class="headerlink" title="hexo基础用法"></a>hexo基础用法</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo s </span><br><span class="line">#server --启动local host，退出用ctrl+c</span><br><span class="line">hexo new "My New Post"</span><br><span class="line">#new --创建新文章</span><br><span class="line">hexo clean</span><br><span class="line">#clean --清除缓存</span><br><span class="line">hexo g</span><br><span class="line">#generate --生成</span><br><span class="line">hexo d</span><br><span class="line">#deployer --若time out可多试几次</span><br></pre></td></tr></table></figure></div>
+
+<p>若执行hexo g出错则执行<code>npm install hexo --save</code><br>若执行hexo d出错则执行<code>npm install hexo-deployer-git --save</code><br>错误修正后再次执行hexo g和hexo d上传到服务器</p>
+]]></content>
+      <tags>
+        <tag>Technology</tag>
+        <tag>Github</tag>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【置顶】UnblockNeteaseMusic小白简明教程</title>
+    <url>/2022/08/15/netease/</url>
+    <content><![CDATA[<h1 id="开源项目nondanee-UnblockNeteaseMusic小白简明教程（PC端）"><a href="#开源项目nondanee-UnblockNeteaseMusic小白简明教程（PC端）" class="headerlink" title="开源项目nondanee/UnblockNeteaseMusic小白简明教程（PC端）"></a>开源项目nondanee/UnblockNeteaseMusic小白简明教程（PC端）</h1><p><em>一些可以直接忽略的：近日Moo音乐上的《中国说唱巅峰对决》都不能听了，白瞎了我以新用户身份开的第一个月会员（虽然只有一元x）。加上一言难尽的QQ音乐UI界面、网抑云的各种VIP试听，我忽然怀念起17年前的听歌自由。万幸的是这个强大的工具可以将我爱的Eason经典、绿团、黑怕都和平统一起来！</em></p>
+<p>话不多说，我们言归正传：</p>
+<h2 id="搭建代理"><a href="#搭建代理" class="headerlink" title="搭建代理"></a>搭建代理</h2><p>以下提供三种方法，方法一和方法二需要事先下载<a class="link" href="https://nodejs.org/en/download/">Node.js <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，方法三需要下载<a class="link" href="https://www.docker.com/get-started/">Docker <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p><em><strong>三选一即可</strong></em></p>
+<ol>
+<li>运行npx指令</li>
+</ol>
+<p>按下<code>win+R</code>，输入<code>cmd</code>进入控制台，然后运行：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">npx @nondanee/unblockneteasemusic</span><br></pre></td></tr></table></figure></div>
+
+<p>出现提示后按下y后回车。</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/netease/net1.jpg"></p>
+<p>之后耐心等待其消息提示即可。</p>
+<p><strong>ps：如果一直不响应，可以使用<code>ctrl+C</code>来确认退出重试。</strong></p>
+<p>一些可能出现的报错：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/netease/net2.jpg"></p>
+<p>可以尝试重新用相同的命令多次运行，直到出现：<code>HTTP Server running @ http://0.0.0.0:8080</code>的提示。根据本人经验，全程<strong>先不要启动网易云音乐软件</strong>、在成功之后<strong>别把该页面叉出去</strong>！</p>
+<ol start="2">
+<li>运行npm命令</li>
+</ol>
+<p>类似方法一的道理，多了一步，仅有略微区别，输入下面指令即可：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line"># npm i -g @nondanee/unblockneteasemusic</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">unblockneteasemusic</span><br></pre></td></tr></table></figure></div>
+
+<ol start="3">
+<li>使用docker</li>
+</ol>
+<p>该方法可能略麻烦一些x</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/netease/docker.jpg" alt="docker"></p>
+<p>在有了docker之后，打开软件<strong>保持其运行状态</strong>，然后按下<code>win+R</code>，输入<code>cmd</code>进入控制台，输入命令：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker pull nondanee/unblockneteasemusic</span><br></pre></td></tr></table></figure></div>
+
+<p><img lazyload="" src="/images/loading.svg" data-src="/netease/dc1.jpg"></p>
+<p>我们回到软件会发现，镜像image里多了一行信息，我们在程序上按下==RUN==，在<em>Optional setting</em>里找到<em>Host port</em>输入默认的端口8080，然后第一行的<em>name</em>可以随意取一个如<code>wangyiyun</code>即可生成一个容器，在<em>Container</em>界面，如果没有启动，就按三角形启动（<strong>听歌过程中要保证它时刻在运行中</strong>）</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/netease/dc2.jpg"></p>
+<p>代理部分就此完毕，下一步我们进行网易云客户端的配置。</p>
+<h2 id="配置客户端"><a href="#配置客户端" class="headerlink" title="配置客户端"></a>配置客户端</h2><ol start="0">
+<li>注意事项</li>
+</ol>
+<p>由于该项目已有近两年没有更新，因此可能出现一些问题，包括最新的版本可能无法使用（当然有的网友反应也可以）。在此提供历史版本链接：<a class="link" href="https://blog.amarea.cn/archives/netease-cloudmusic-history-version.html">neteasemusic <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>。笔者在2.9.6版本可以使用，笔者的一个朋友则退到2.9.0才能正常破解。</p>
+<ol>
+<li>常规操作</li>
+</ol>
+<p>在网易云音乐客户端打开<strong>设置&gt;&gt;工具&gt;&gt;http代理&gt;&gt;自定义代理</strong>，</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/netease/wyyyy.png" alt="wyy"></p>
+<p>在服务器上输入自己的ip地址，查询方法之一是搜索“控制面板”，依次进入<strong>网络和Internet&gt;&gt;网络共享中心</strong>，点击链接查看WLAN状态</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/netease/wlan.jpg" alt="wlan"></p>
+<p><code>详细信息</code>中的<code>ipv4地址</code>即是需要填写的IP地址。</p>
+<p>然后端口处填写默认的<code>8080</code>，按<code>确认</code>后重启即可使用~</p>
+<h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><p><img lazyload="" src="/images/loading.svg" data-src="/netease/xiaoguo.jpg"></p>
+<p>无需VIP即可下载歌曲，将其下载之后存入我的网易云云盘，即可在多个设备上欣赏歌曲啦！！</p>
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p>项目链接：<a class="link" href="https://github.com/nondanee/UnblockNeteaseMusic">UnblockNetmusic <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>作者提供的食用教程：<a class="link" href="https://github.com/nondanee/UnblockNeteaseMusic/issues/22">使用教程 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>更多可参考教程：</p>
+<p><a class="link" href="https://blog.csdn.net/weixin_39684898/article/details/110639603">docker详解 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p><a class="link" href="https://www.youtube.com/watch?v=AO4ewgaaZ_U">Youtube视频教学 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+]]></content>
+      <tags>
+        <tag>Technology</tag>
+        <tag>Github</tag>
+        <tag>netease</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>「发呆改变世界」02.给身边的物品起个名字</title>
+    <url>/2023/04/12/warma02/</url>
+    <content><![CDATA[<h1 id="「发呆改变世界」02-给身边的物品起个名字"><a href="#「发呆改变世界」02-给身边的物品起个名字" class="headerlink" title="「发呆改变世界」02.给身边的物品起个名字"></a>「发呆改变世界」02.给身边的物品起个名字</h1><p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/video&audio.md/img-20230411121351.png" alt="Img"></p>
+<blockquote>
+<p>假如我们身边的物品都长出了眼睛，甚至拥有了思考的能力，那么尽管它们不能说话，我们也一定会用不同的眼光重新看待它们吧。到那时世界一定会大变样，人们也需要习惯与有思想的物品们一同相处。那会是一种怎样的生活呢？也许我们可以用一个简单的方式来体验一下：<br>让我们为身边的物品起个名字，把它当作我们的朋友吧！<br>我们可以选择手边任意一个物品，就像对待家人、朋友那样，我们需要为它起个合适的名字，这样一来我们便与它建立了情感联系。<br>恭喜你！从今天起它就是你的新朋友啦。可是你真的足够了解这位朋友吗？如果你足够了解它，那么以下三条简单的问题想必你也可以轻松地回答出来吧。</p>
+</blockquote>
+<p>请看着你的新朋友，回答以下三个问题：<br>①你觉得它对你的印象如何？<br>②你觉得自己对待这个朋友的态度如何？<br>③你还会用和原来一样的方式对待它吗？</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma02.md/img-20230412000349.png" alt="Img"></p>
+<p>⬆️warma太可爱了hhhh</p>
+<p>接下来俺也来试试：！</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma02.md/img-20230412000441.png" alt="Img"></p>
+<p>戳啦，不是这个意思</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma02.md/img-20230412000502.png" alt="Img"></p>
+<ul>
+<li>手机？ 叫你史珍香好不好？（指指戳戳）（指指戳戳）</li>
+<li>书籍？ 哦？你是《深入理解计算机系统》哇，我看你命里缺金，就叫你小王吧（盖泡面）（学hyx垫电脑）</li>
+<li>书籍？ 哦，还有一本《一句顶一万句》，叫你刘震云就抢了GPT的灵感，不如就叫你《顶嘴》吧（doge）（翻来覆去）（后面看了前面忘了）</li>
+<li>宠物？ hyx说就想养条小狗，不管雄的雌的都可以叫布丁x（摸摸）（撸撸）（嗅嗅）</li>
+<li>家具？ 虽然不在家，但我坐在古老上，住在质朴里，希望你不是铃芽之旅的男主转世。</li>
+<li>食物？ 我今天吃了一条鱼，叫你“诡异的光”不过分吧（吃背上的）（吃肚子上的）（蘸汤）（分解残骸）（好残忍x）</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>Creative</tag>
+        <tag>warma</tag>
+        <tag>给身边的物品起个名字</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>「发呆改变世界」01.起一个全新的网名</title>
+    <url>/2023/04/11/warma01/</url>
+    <content><![CDATA[<h1 id="「发呆改变世界」01-起一个全新的网名"><a href="#「发呆改变世界」01-起一个全新的网名" class="headerlink" title="「发呆改变世界」01.起一个全新的网名"></a>「发呆改变世界」01.起一个全新的网名</h1><p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/video&audio.md/img-20230411121351.png" alt="Img"></p>
+<p><strong>开始发呆吧！</strong></p>
+<h2 id="方法-1：将两种毫不相关的词组合起来"><a href="#方法-1：将两种毫不相关的词组合起来" class="headerlink" title="方法 1：将两种毫不相关的词组合起来"></a>方法 1：将两种毫不相关的词组合起来</h2><blockquote>
+<p>请想象自己正走在一条商业街上，路边有各式各样餐馆，那么你会对什么样的店名感兴趣呢？是“老张饭馆”这个店名更显眼，还是“宇宙大粮仓”这个店名更吸引你呢？如果这时有一个面积特别小的迷你店铺，它的名字却叫“世界中心大饭店”，那么你会想要走进去看一看吗？<br><strong>也许我们的本能就是会对超出我们常识的东西感兴趣，不论你喜欢与否，它始终都会在那儿吸引着你的注意力。</strong> 那么在起名字这件事上，我们是否也可以用同样的思路来试试看呢？突破常识的限制，让我们大胆地组合全新的东西吧！</p>
+</blockquote>
+<h3 id="“常见的-不常见的”词组"><a href="#“常见的-不常见的”词组" class="headerlink" title="“常见的 / 不常见的”词组"></a>“常见的 / 不常见的”词组</h3><p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma01.md/img-20230411144003.png" alt="Img"></p>
+<p>让俺也来试试…</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma01.md/img-20230411145414.png" alt="Img"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma01.md/img-20230411145852.png" alt="Img"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma01.md/img-20230411150207.png" alt="Img"></p>
+<table>
+<thead>
+<tr>
+<th>不常见的东西</th>
+<th>x</th>
+<th>常见的东西</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>林黛玉</td>
+<td></td>
+<td>泡腾片</td>
+</tr>
+<tr>
+<td>豆瓣酱</td>
+<td></td>
+<td>奥特曼</td>
+</tr>
+<tr>
+<td>太阳</td>
+<td></td>
+<td>键盘</td>
+</tr>
+<tr>
+<td>仙人掌</td>
+<td></td>
+<td>汽水</td>
+</tr>
+<tr>
+<td>末日</td>
+<td></td>
+<td>牙刷</td>
+</tr>
+<tr>
+<td>钢铁</td>
+<td></td>
+<td>北极熊</td>
+</tr>
+<tr>
+<td>荧光</td>
+<td></td>
+<td>龙虾汤</td>
+</tr>
+<tr>
+<td>天空</td>
+<td></td>
+<td>人字拖</td>
+</tr>
+<tr>
+<td>烈焰</td>
+<td></td>
+<td>马桶</td>
+</tr>
+<tr>
+<td>……</td>
+<td></td>
+<td>……</td>
+</tr>
+</tbody></table>
+<p>排列组合一下，我叫做————</p>
+<ul>
+<li>林黛玉泡腾片</li>
+<li>林黛玉奥特曼</li>
+<li>豆瓣酱牙刷</li>
+<li>太阳人字拖</li>
+<li>太阳北极熊</li>
+<li>仙人掌键盘</li>
+<li>仙人掌奥特曼</li>
+<li>仙人掌人字拖</li>
+<li>仙人掌马桶</li>
+<li>末日牙刷</li>
+<li>末日马桶</li>
+<li>钢铁龙虾汤</li>
+<li>荧光龙虾汤</li>
+<li>荧光马桶</li>
+<li>天空人字拖</li>
+<li>烈焰牙刷</li>
+<li>烈焰北极熊</li>
+<li>烈焰马桶</li>
+<li>……</li>
+</ul>
+<p>（有机会学画一些x指向文新一言学习x疯狂挖坑警告⚠️）</p>
+<h3 id="另外"><a href="#另外" class="headerlink" title="另外"></a>另外</h3><blockquote>
+<p>除此之外，其实可供我们拼接组合的词语类型还有很多：<br>・快乐的 / 悲伤的<br>・巨大的 / 微小的<br>・正义的 / 邪恶的<br>・科学的 / 魔法的<br>・滚烫的 / 寒冷的</p>
+</blockquote>
+<h2 id="方法-2：故意“打错字”"><a href="#方法-2：故意“打错字”" class="headerlink" title="方法 2：故意“打错字”"></a>方法 2：故意“打错字”</h2><blockquote>
+<p>不妨让我们先以身边常见的东西为例吧！比如“鼠标”这个词，如果一不小心打错了字的话，就会变成……<br><strong>鼠飙</strong>！<br>原本安静的鼠标现在竟然在狂奔！甚至再狂野一点，也有可能是一只大坏蛋老鼠在屋子里高速狂飙！这会是多么令人震惊的场面啊。原来只要稍微打错一点点字，普通的词语就能迸发出意想不到的乐趣，不妨让我们再多打错几次试试吧：<br>・鼠标→蜀标：变成四川的标志了，非常帅气<br>・鼠标→树表：挂在树上的钟表，亲近自然的感觉<br>・鼠标→氀驫：……能打错到这种程度也是高手吧</p>
+</blockquote>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma01.md/img-20230411152023.png" alt="Img"></p>
+<p>虽然GPT创造的错字不太靠谱，但是不妨试试这些词语——</p>
+<ul>
+<li>钢笔-&gt;钢鼻</li>
+<li>钢笔-&gt;钢狴</li>
+<li>钢笔-&gt;*笔（<em>禁止ghs🚗x</em>）</li>
+<li>电脑-&gt;癫脑</li>
+<li>电脑-&gt;堤岸瑙</li>
+<li>手机-&gt;守鸡</li>
+<li>手机-&gt;受激</li>
+<li>电视-&gt;电屎（好有病啊哈哈哈哈）</li>
+<li>电视-&gt;巅豕</li>
+<li>电视-&gt;簟蓍</li>
+<li>……（打不动了）</li>
+</ul>
+<h2 id="方法-3：无需多虑，写出现在的心声"><a href="#方法-3：无需多虑，写出现在的心声" class="headerlink" title="方法 3：无需多虑，写出现在的心声"></a>方法 3：无需多虑，写出现在的心声</h2><blockquote>
+<p>朴实无华的心声往往有着极具感染力的效果，所以让我们听听自己的心声吧！不论多么简单直白的想法都可以，让我们试着将它们记录下来：<br>・我好喜欢吃辣椒<br>・我好困啊<br>・我想去外面散散步<br>・我好想吃米线啊<br>・……<br>让我们以“我好想吃米线啊”为例，如果将它直接作为网名使用，那这也许会是个可以引起他人共鸣的好名字……尽管这个名字很有可能早已被其他人占用了。那么我们或许可以再进一步加工这个名字，让它变得更加独特一些。提到米线这种食物，我们一般会想到什么呢？<br>米线 → 过桥米线<br>可是过桥米线也很有名，万一有人和我们想到一块儿去了，起了个一模一样的网名怎么办呀？那就让我们再进一步联想一下：<br>过桥米线 → 过马路米线、过河米线、过海米线<br>咦？“过海”这两字听起来好熟悉，让人想起成语“瞒天过海”，那么这份米线是否可以叫做“瞒天过海米线”？如果在米线餐馆的菜单上真有这么一道菜的话，那该多独特多吸引人呀！<br>以及“过马路米线”这个名字好像也很有趣，如果真的有这样的米线，那说不定是人们拆除了曾经的破木桥后又建起了宽敞的道路，所以才诞生了全新的“过马路米线”吧！如果你看到一位有趣的网友名字叫“我好想吃过马路米线啊”，那么你会愿意为这个名字多停留一秒钟吗？</p>
+</blockquote>
+<p>试试就逝世————</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma01.md/img-20230411153411.png" alt="Img"></p>
+<ul>
+<li>我完全不知道现在在干什么，但是我早午饭吃的是一碗康师傅香辣牛肉面</li>
+</ul>
+<p>香辣牛肉面：香香辣辣牛肉泡面</p>
+<p>不妨进行“变异测试”（将软件测试知识用到一些意想不到的地方x）</p>
+<ul>
+<li>臭臭甜甜大白菜包面</li>
+<li>清淡微甜空心菜缠面</li>
+<li>香香苦苦板蓝根炒面</li>
+<li>酸甜苦辣蛋白粉搅面</li>
+<li>……</li>
+</ul>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><blockquote>
+<p>综上而言，世上有千万种可以诞生有趣名字的方法，以上三个方法仅仅是那沧海一粟。虽然我们的篇幅有限，无法装下一整片大海， <strong>但是幸好那片沧海就在你的心里，它们与你的想象力同在。</strong> 去看看心里的这片想象力的大海吧，我们还可以创造更多！</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>Creative</tag>
+        <tag>warma</tag>
+        <tag>起一个全新的网名</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>「发呆改变世界」03.猜花语</title>
+    <url>/2023/04/15/warma03/</url>
+    <content><![CDATA[<h1 id="「发呆改变世界」03-猜花语"><a href="#「发呆改变世界」03-猜花语" class="headerlink" title="「发呆改变世界」03.猜花语"></a>「发呆改变世界」03.猜花语</h1><blockquote>
+<p>每到春天的时候，树上就会开出一些新的花。通常而言，人类认为花朵是不会讲话的，毕竟我们从来没听到过它们的声音。那么“花语”这种东西到底是为了什么而存在的呢？这个原因也许只有创造了“花语”这个概念的人类才明白。<br>“花语”是由人们创造出来用来表达感情与愿望的东西， <strong>那么只要是心中有声音想要传达出来的人，就一定能为“花语”创造出全新的内涵。</strong> 我们每个人其实都有创造花语的能力，即便是不认识的花，我们也可以从它那儿感受到一些独特的东西。<br>那不妨让我们来试试猜花语吧！</p>
+</blockquote>
+<ol>
+<li>找一朵你不认识的花</li>
+<li>看着这朵花，猜测它的花语</li>
+<li>寻找花名，查询它真正的花语</li>
+<li>对照其花语，你的猜测与之相符吗？</li>
+</ol>
+<p>ChatGPT：<br><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma03.md/img-20230415141851.png" alt="Img"></p>
+<ul>
+<li>玫瑰(Rose)</li>
+</ul>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma03.md/img-20230415142013.png" alt="Img"></p>
+<p>啊，玫瑰，这血红/淡粉，透露着典雅浪漫？ 如果格局打开的话，估计是——<strong>战斗</strong>！</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma03.md/img-20230415143259.png" alt="Img"></p>
+<ul>
+<li>康乃馨(Carnation)</li>
+</ul>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma03.md/img-20230415142211.png" alt="Img"></p>
+<p>我其实知道这是母亲节的花，那么就有那种慈祥和善的感觉。这其实像某一种甜品/或者某一种甜品很像它，比如生日蛋糕里的奶油花。我的印象是：<strong>味甜但不腻</strong>x</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma03.md/img-20230415143245.png" alt="Img"></p>
+<ul>
+<li>百合(Lily)</li>
+</ul>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma03.md/img-20230415142536.png" alt="Img"></p>
+<p>听这个名字，dddd了，看这个样子，也确实很弯x 话说回来，不能一看到它就给另一种群体贴标签，所以我定义它是<strong>计算机乘法</strong>*！</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma03.md/img-20230415143230.png" alt="Img"></p>
+<ul>
+<li>向日葵(Sunflower)</li>
+</ul>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma03.md/img-20230415142749.png" alt="Img"></p>
+<p>这种见的也多（指：植物大战僵尸）搞得我真觉得它是一种脸型动物x 仿佛说的是：<strong>劳动/军训</strong> 好在劳动节放一个大长假，坏在军训训一个大长假x</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma03.md/img-20230415143207.png" alt="Img"></p>
+<ul>
+<li>郁金香(Tulip)</li>
+</ul>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma03.md/img-20230415143014.png" alt="Img"></p>
+<p>我当时觉得它特好看，就真的是<strong>团结</strong>的<strong>海洋</strong></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma03.md/img-20230415143134.png" alt="Img"></p>
+<p>剩下的写不动了，先略x</p>
+<p>樱花(Cherry Blossom)<br>牵牛花(Morning Glory)<br>菊花(Chrysanthemum)<br>茉莉(Jasmine)<br>紫罗兰(Violet)</p>
+<blockquote>
+<p>花语其实没有对与错之分，毕竟它只是人类对花的理解和寄托，任何人都有重新诠释花语的自由。不论这朵花实际的花语如何，你猜出来的花语仍然是独属于你的那个最棒的答案。 </p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>Creative</tag>
+        <tag>warma</tag>
+        <tag>猜花语</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>「发呆改变世界」05.创造一个新的词语</title>
+    <url>/2023/04/16/warma05/</url>
+    <content><![CDATA[<h1 id="「发呆改变世界」05-创造一个新的词语"><a href="#「发呆改变世界」05-创造一个新的词语" class="headerlink" title="「发呆改变世界」05.创造一个新的词语"></a>「发呆改变世界」05.创造一个新的词语</h1><blockquote>
+<p>这个世界上有很多不喜欢吃香菜的人，这是很正常的事情，因为每个人的味蕾喜好都不一样，我们可以包容不同的存在。那么，想必这个世界上应该也有一些人，他们既不喜欢香菜又不喜欢吃芫荽，不过这也很正常，毕竟口味不同嘛。可是，竟然有人会同时讨厌吃香菜、芫荽和胡荽！我甚至还见到过有人同时讨厌吃芫荽、胡荽、香菜、香荽和延荽，这真是太不可思议太神奇了！这神奇就神奇在――<br>芫荽、胡荽、香荽和延荽，它们全都是同一种东西，是香菜的别名。<br>一种东西居然可以拥有很多种不同的名字，这真是个有趣的世界！那我们为什么不试试为这个有趣的世界添砖加瓦呢？<br>我们也可以创造更多全新的词语！</p>
+</blockquote>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma05.md/img-20230416212531.png" alt="Img"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma05.md/img-20230416212540.png" alt="Img"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma05.md/img-20230416212549.png" alt="Img"></p>
+<p>下面就让我来试试修改曾经在Bilibili上的一段传世经典——giegie吧！</p>
+<p>原文是这样的：</p>
+<blockquote>
+<p>女：giegie，你给我买这个你女朋友知道了，不会生气吧？（拿出棒棒糖）<br>真好吃，gie你尝一口。<br>啊！giegie，你女朋友要是知道我俩吃同一个棒棒糖，你女朋友不会吃醋吧？<br>giegie，你骑着小、小电动车带着我，你女朋友知道了，不会揍我吧？<br>好可怕，你女朋友，不像我，只会心疼giegie～</p>
+</blockquote>
+<p>主角是什么？显然是“giegie”这个不太好改，毕竟视频就是靠这个出戏的，所以来性转一下吧，“钾加（jiajia）”不错诶</p>
+<p>其次，既然是性转版，那自然就要把“女朋友”改成“男朋友”。根据上面的要求，“男”就是“雄”，“朋友”就是“伙伴”，所以——</p>
+<p>我们把“男朋友”改成“雄伙伴”！</p>
+<p>先初步修改为性转版大纲：</p>
+<blockquote>
+<p>男：jiajia，你给我买这个你雄伙伴知道了，不会生气吧？（拿出棒棒糖）<br>真好吃，jia你尝一口。<br>啊！jiajia，你雄伙伴要是知道我俩吃同一个棒棒糖，你雄伙伴不会吃醋吧？<br>jiajia，你骑着小、小电动车带着我，你雄伙伴知道了，不会揍我吧？<br>好可怕，你雄伙伴，不像我，只会心疼jiajia～</p>
+</blockquote>
+<p>接下来——就开始正式整活（思考过程略，上下对照即可（确信））！</p>
+<blockquote>
+<p>男：jiajia，恁给俺买这个恁雄伙伴晓得了，不会产火吧？（拿出圆晕彩串）<br>真好吃，jia你尝一口。<br>啊！jiajia，你雄伙伴要是知道我俩吃同一个圆晕彩串，你雄伙伴不会品酸吧？<br>jiajia，你骑着小、小双轮驴带着我，你雄伙伴知道了，不会揍我吧？<br>好可怕，你雄伙伴，不像我，只会心疼jiajia～</p>
+</blockquote>
+<p>好好玩！有空一定继续改别的！</p>
+]]></content>
+      <tags>
+        <tag>Creative</tag>
+        <tag>warma</tag>
+        <tag>创造一个新的词语</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>「发呆改变世界」06.探索有趣的地名</title>
+    <url>/2023/04/17/warma06/</url>
+    <content><![CDATA[<h1 id="「发呆改变世界」06-探索有趣的地名"><a href="#「发呆改变世界」06-探索有趣的地名" class="headerlink" title="「发呆改变世界」06.探索有趣的地名"></a>「发呆改变世界」06.探索有趣的地名</h1><p><em>俺又更新辣！</em></p>
+<blockquote>
+<p>如果有一座山的名字叫“我是山”，你会不会好奇这是一座什么样的山呢？住在这座山脚下的人，聊起“我是山”时会露出什么样的表情？又是谁给这座山起了这么个奇奇怪怪的名字？真想去“我是山”那儿看看呀，虽然目前还不存在这么一个地方。不过没关系，这个世界上一定还有很多有趣的地名，好在这是一个信息发达的时代，我们可以轻松地查到它们，那么这就让我们上网搜索“有趣的地名”――<br>等等！ 在接收来自他人整理好的信息之前，不妨让我们先探索一下如何？ 我敢打赌这个世界上有趣的地名一定有好几万个，网络上的文章还不足以将它们全部收集齐呢。你想知道自己所在的地方附近有哪些有趣的地名吗？<br>让我们打开地图软件去找找看吧！</p>
+</blockquote>
+<h2 id="方法-1：想个感兴趣的地名，上网搜索是否真的存在"><a href="#方法-1：想个感兴趣的地名，上网搜索是否真的存在" class="headerlink" title="方法 1：想个感兴趣的地名，上网搜索是否真的存在"></a>方法 1：想个感兴趣的地名，上网搜索是否真的存在</h2><blockquote>
+<p>令人感到可惜的是，“我是山”这个地名目前还并不存在于真实世界中，但是没有关系，说不定未来的某一天会有人以这个名字去命名一座山呢？也许是几十年后，或者几万年后……现在没有也没关系，我们来找找其他的地名吧！<br>有没有地方叫做“猫猫山”呢？那说不定也有地方叫“鱼山”吧？幸好这两座山隔得够远，否则两座山说不定会融合到一起呢。如果有三个村子分别叫“蝉村”“螳螂村”“黄雀村”，那这三个村的村民如果见面了，他们可以成为朋友吗？<br>我们可以像这样在脑中先构思一个有趣的名字，如果在地图上真的能找到这么一个地方的话，这一定会是一次有趣的体验吧。</p>
+</blockquote>
+<p>这也是个有趣的想法。我个人觉得，其实未名湖与博雅塔就很有特色x</p>
+<p>搜了很多，但也有很多不便展示x</p>
+<h2 id="方法-2：在地图中随便逛逛"><a href="#方法-2：在地图中随便逛逛" class="headerlink" title="方法 2：在地图中随便逛逛"></a>方法 2：在地图中随便逛逛</h2><blockquote>
+<p>让我们在地图上不带任何目的地闲逛吧！就像散步一样，我们可以从自己居住的地方出发，让我们将视线移向那些我们平时从未去过的地方：<br>如果你在地图上发现一个叫“山后面”的地方，可是却没有与之对应的地名叫“山前面”；如果你在地图上发现了个地名叫“大水坑”，可是旁边却一个水坑都找不到；如果你发现有个地名叫“三角塘”，但是那儿的水塘在地图上看起来其实更像六边形……<br>虽然这一切听起来很奇怪，然而地图上确实有这样神奇的地方，我们只需要在地图上散步不到十分钟，就能找到好几个足以吸引我们注意的有趣地名。<br>探索着探索着，你也不禁感到好奇了起来，到底是什么样的人会给自己居住的地方起上这么有趣的名字呢？他们在起名时是抱着怎样的心态和想法呢？既然在这片辽阔的土地上生活着这么多有趣的人，他们将生活热情通过地名传达给了正在查看地图的我们，那么我们也可以接过热情的火把，将这份温度继续传递下去吧。</p>
+</blockquote>
+<p>最近正好在计划五一出游的事情。本来是想去石家庄-&gt;合肥-&gt;杭州的，最后临时起意并计划去南通-&gt;杭州</p>
+<p>南通，其实这个地名本身就让人浮想联翩（乐）</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma06.md/img-20230417234309.png" alt="Img"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma06.md/img-20230417234321.png" alt="Img"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma06.md/img-20230417234443.png" alt="Img"></p>
+<p>画风好像越来越不对劲了，这不是去幼儿园的车！</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma06.md/img-20230417234336.png" alt="Img"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma06.md/img-20230417234346.png" alt="Img"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma06.md/img-20230417234355.png" alt="Img"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma06.md/img-20230417234401.png" alt="Img"></p>
+<p>翻身三组、福利六组，你俩凑一对算了。</p>
+<p>再来看看hyx的家乡玉环捏：</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma06.md/img-20230417234520.png" alt="Img"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma06.md/img-20230417234512.png" alt="Img"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma06.md/img-20230417234529.png" alt="Img"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma06.md/img-20230417234555.png" alt="Img"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma06.md/img-20230417234541.png" alt="Img"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma06.md/img-20230417234547.png" alt="Img"></p>
+<p>又是一对卧龙凤雏（确信</p>
+<p>剩下的慢慢再看！先写到这里。</p>
+]]></content>
+      <tags>
+        <tag>Creative</tag>
+        <tag>warma</tag>
+        <tag>探索有趣的地名</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>「发呆改变世界」04.将任意事物画成圆形</title>
+    <url>/2023/04/15/warma04/</url>
+    <content><![CDATA[<h1 id="「发呆改变世界」04-将任意事物画成圆形"><a href="#「发呆改变世界」04-将任意事物画成圆形" class="headerlink" title="「发呆改变世界」04.将任意事物画成圆形"></a>「发呆改变世界」04.将任意事物画成圆形</h1><blockquote>
+<p>在我们的世界中有太多司空见惯的事物是圆形的，比如地球、月球、气球……咦？地球、月球的圆形是大自然的鬼斧神工，但人类居然自己也创造出了圆形的气球，莫非圆形其实是一种很受人类欢迎的图案？那如果万物都变成了圆形的话，这样的世界会变得更有趣吗？不妨让我们来试着将任意事物画成圆形吧！这个绘画过程并不复杂，你可以在纸上、电脑上、触屏手机上或者任意能画画的东西上实现这个过程</p>
+</blockquote>
+<h2 id="步骤-1：让我们先选一个想要画成圆形的事物"><a href="#步骤-1：让我们先选一个想要画成圆形的事物" class="headerlink" title="步骤 1：让我们先选一个想要画成圆形的事物"></a>步骤 1：让我们先选一个想要画成圆形的事物</h2><blockquote>
+<p>我们可以大胆任意地选择，因为这个世界上任何事物都可以被我们改造，不论是雨后的彩虹、恐怖大蜘蛛、死机的电脑、路边的行人，只要我们愿意，我们的笔下就可以诞生出全新的圆形生命。这里让我们以一只大白鹅为原型来进行改造吧！</p>
+</blockquote>
+<h2 id="步骤-2：照着参考原型将其画下来"><a href="#步骤-2：照着参考原型将其画下来" class="headerlink" title="步骤 2：照着参考原型将其画下来"></a>步骤 2：照着参考原型将其画下来</h2><p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma04.md/img-20230415161640.png" alt="Img"></p>
+<h2 id="步骤-3：初步进行简化"><a href="#步骤-3：初步进行简化" class="headerlink" title="步骤 3：初步进行简化"></a>步骤 3：初步进行简化</h2><p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma04.md/img-20230415161650.png" alt="Img"></p>
+<h2 id="步骤-4：再次进行简化"><a href="#步骤-4：再次进行简化" class="headerlink" title="步骤 4：再次进行简化"></a>步骤 4：再次进行简化</h2><p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma04.md/img-20230415161658.png" alt="Img"></p>
+<h2 id="步骤-5：亿点点细节"><a href="#步骤-5：亿点点细节" class="headerlink" title="步骤 5：亿点点细节"></a>步骤 5：亿点点细节</h2><p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma04.md/img-20230415161722.png" alt="Img"></p>
+<p>这一次我试着不依靠ChatGPT，自己创造一样！</p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma04.md/img-20230415170549.jpg" alt="Img"></p>
+]]></content>
+      <tags>
+        <tag>Creative</tag>
+        <tag>warma</tag>
+        <tag>将任意事物画成圆形</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>「发呆改变世界」07.列一个梦想清单</title>
+    <url>/2023/04/18/warma07/</url>
+    <content><![CDATA[<h1 id="「发呆改变世界」07-列一个梦想清单"><a href="#「发呆改变世界」07-列一个梦想清单" class="headerlink" title="「发呆改变世界」07.列一个梦想清单"></a>「发呆改变世界」07.列一个梦想清单</h1><blockquote>
+<p>夜深人静躺在被窝里的时候，人有时会开始天马行空地幻想：如果我会魔法该多好呀、如果我一个人住在一个岛上会怎样、要是一整个超市里的东西都可以让我免费吃、如果我是个家喻户晓的大明星……虽然有些想法我们明知很难实现，但这从来都阻挡不了我们继续幻想的热情。<br>人类为什么会喜欢幻想呢？ 是因为在幻想之中隐藏着可以改造现实的线索吗？在我们的各种渴望之中，是否藏着一些真正想要实现的心愿呢？<br>让我们来列一个梦想清单吧！</p>
+</blockquote>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma07.md/img-20230418225936.png" alt="Img"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma07.md/img-20230418225946.png" alt="Img"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma07.md/img-20230418225956.png" alt="Img"></p>
+<p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/warma07.md/img-20230418230003.png" alt="Img"></p>
+<p>这是我在B站上看到的warma出的视频的最后一篇了。完结撒花🎉</p>
+<p>说起梦想，其实，最近的让俺备受困扰的起重机就让我萌生了“俺要调整好自己的生物钟作息”的梦想</p>
+<p>虽然直到今天，我已尝试了一周多，但是屡次失败，屡战屡败，屡败屡战，<br>然而，今天我好好学了一点，跑了步，也贴了贴，希望可以让我的身体感受到俺的用心x</p>
+<p>我还有很多梦想。</p>
+<p>俺想要很开心，天天开心，<br>有时候独处是开心的，宁静平稳的开心，孤傲清高的开心<br>有时候贴贴是开心的，就像寒冬的暖阳、春日的和风<br>有时候见老长辈是开心的，那是一种感动的，甚至略微有些矫情的<br>有时候和朋友玩也是开心的，约约聚餐，寒暄八卦，吃喝玩乐</p>
+<p>虽然人际关系在这个时代其实不堪一击，<br>但是我总会向往那些抛弃许多枷锁的态度，无畏自由地生活。</p>
+<p>俺也想赚好多好多钱。今天正好高中一个读财经大学的同学说暑假打算创业。<br>想来俺这个酒吧舞也能给人老板打工，拿工资，<br>以及甚至靠着这个做一点公益（虽然可能会是一个画的大饼）<br>就觉得哇，俺真的是一个成年人、一个大人了（剩下十八天就奔三力）</p>
+<p>（写到一半怎么有一种提前写生日愿望的感觉）<br>说起来，我每次生日的时候，让我突然想出自己的愿望，想不到好的；<br>或者在平时，跟人聊到生日礼物，我也没啥思路；<br>甚至别人过生日我也没怎么准备过礼物；<br>甚至有一回别人过生日，我明明提前几天买好了礼物放在包里，<br>最后还是因为各种心思没有拿出来，最后自己拿来玩了（大雾）</p>
+<p>不管怎么说，有人愿望世界和平，有人愿望平安喜乐。希望所有人都会如愿。（突然）</p>
+]]></content>
+      <tags>
+        <tag>Creative</tag>
+        <tag>warma</tag>
+        <tag>列一个梦想清单</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>「苏打绿」air-空视幻</title>
+    <url>/2023/04/06/soda/</url>
+    <content><![CDATA[<h1 id="air-空视幻"><a href="#air-空视幻" class="headerlink" title="air-空视幻"></a>air-空视幻</h1><p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/soda.md/img-20230411005106.png" alt="Img"></p>
+<p>《空气中的视听与幻觉》是乐团第一首单曲。<br>dsad soda</p>
+<p><mark>dasdasdasdasda</mark></p>
+<p><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.023ex;" xmlns="http://www.w3.org/2000/svg" width="3.434ex" height="1.593ex" role="img" focusable="false" viewBox="0 -694 1518 704"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g><g data-mml-node="mi" transform="translate(469,0)"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g><g data-mml-node="mi" transform="translate(998,0)"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g></g></g></svg></mjx-container></p>
+<p><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -0.791ex;" xmlns="http://www.w3.org/2000/svg" width="7.274ex" height="2.713ex" role="img" focusable="false" viewBox="0 -849.5 3215.1 1199"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g><g data-mml-node="TeXAtom" transform="translate(562,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mn"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g></g><g data-mml-node="mo" transform="translate(1243.3,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(2299.1,0)"><g data-mml-node="mo" transform="translate(0 -0.5)"><path data-c="28" d="M152 251Q152 646 388 850H416Q422 844 422 841Q422 837 403 816T357 753T302 649T255 482T236 250Q236 124 255 19T301 -147T356 -251T403 -315T422 -340Q422 -343 416 -349H388Q359 -325 332 -296T271 -213T212 -97T170 56T152 251Z"></path></g></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(2757.1,0)"><g data-mml-node="mo" transform="translate(0 -0.5)"><path data-c="29" d="M305 251Q305 -145 69 -349H56Q43 -349 39 -347T35 -338Q37 -333 60 -307T108 -239T160 -136T204 27T221 250T204 473T160 636T108 740T60 807T35 839Q35 850 50 850H56H69Q197 743 256 566Q305 425 305 251Z"></path></g></g></g></g></svg></mjx-container></p>
+<p><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -2.668ex;" xmlns="http://www.w3.org/2000/svg" width="34.778ex" height="5.971ex" role="img" focusable="false" viewBox="0 -1460 15372 2639.2"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D443" d="M287 628Q287 635 230 637Q206 637 199 638T192 648Q192 649 194 659Q200 679 203 681T397 683Q587 682 600 680Q664 669 707 631T751 530Q751 453 685 389Q616 321 507 303Q500 302 402 301H307L277 182Q247 66 247 59Q247 55 248 54T255 50T272 48T305 46H336Q342 37 342 35Q342 19 335 5Q330 0 319 0Q316 0 282 1T182 2Q120 2 87 2T51 1Q33 1 33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM645 554Q645 567 643 575T634 597T609 619T560 635Q553 636 480 637Q463 637 445 637T416 636T404 636Q391 635 386 627Q384 621 367 550T332 412T314 344Q314 342 395 342H407H430Q542 342 590 392Q617 419 631 471T645 554Z"></path></g><g data-mml-node="mo" transform="translate(751,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="msub" transform="translate(1140,0)"><g data-mml-node="mi"><path data-c="1D434" d="M208 74Q208 50 254 46Q272 46 272 35Q272 34 270 22Q267 8 264 4T251 0Q249 0 239 0T205 1T141 2Q70 2 50 0H42Q35 7 35 11Q37 38 48 46H62Q132 49 164 96Q170 102 345 401T523 704Q530 716 547 716H555H572Q578 707 578 706L606 383Q634 60 636 57Q641 46 701 46Q726 46 726 36Q726 34 723 22Q720 7 718 4T704 0Q701 0 690 0T651 1T578 2Q484 2 455 0H443Q437 6 437 9T439 27Q443 40 445 43L449 46H469Q523 49 533 63L521 213H283L249 155Q208 86 208 74ZM516 260Q516 271 504 416T490 562L463 519Q447 492 400 412L310 260L413 259Q516 259 516 260Z"></path></g><g data-mml-node="mi" transform="translate(783,-150) scale(0.707)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g></g><g data-mml-node="mo" transform="translate(2494.7,0)"><path data-c="2223" d="M139 -249H137Q125 -249 119 -235V251L120 737Q130 750 139 750Q152 750 159 735V-235Q151 -249 141 -249H139Z"></path></g><g data-mml-node="mi" transform="translate(3050.5,0)"><path data-c="1D435" d="M231 637Q204 637 199 638T194 649Q194 676 205 682Q206 683 335 683Q594 683 608 681Q671 671 713 636T756 544Q756 480 698 429T565 360L555 357Q619 348 660 311T702 219Q702 146 630 78T453 1Q446 0 242 0Q42 0 39 2Q35 5 35 10Q35 17 37 24Q42 43 47 45Q51 46 62 46H68Q95 46 128 49Q142 52 147 61Q150 65 219 339T288 628Q288 635 231 637ZM649 544Q649 574 634 600T585 634Q578 636 493 637Q473 637 451 637T416 636H403Q388 635 384 626Q382 622 352 506Q352 503 351 500L320 374H401Q482 374 494 376Q554 386 601 434T649 544ZM595 229Q595 273 572 302T512 336Q506 337 429 337Q311 337 310 336Q310 334 293 263T258 122L240 52Q240 48 252 48T333 46Q422 46 429 47Q491 54 543 105T595 229Z"></path></g><g data-mml-node="mo" transform="translate(3809.5,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="mo" transform="translate(4476.3,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mfrac" transform="translate(5532.1,0)"><g data-mml-node="mrow" transform="translate(1681.2,710)"><g data-mml-node="mi"><path data-c="1D443" d="M287 628Q287 635 230 637Q206 637 199 638T192 648Q192 649 194 659Q200 679 203 681T397 683Q587 682 600 680Q664 669 707 631T751 530Q751 453 685 389Q616 321 507 303Q500 302 402 301H307L277 182Q247 66 247 59Q247 55 248 54T255 50T272 48T305 46H336Q342 37 342 35Q342 19 335 5Q330 0 319 0Q316 0 282 1T182 2Q120 2 87 2T51 1Q33 1 33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM645 554Q645 567 643 575T634 597T609 619T560 635Q553 636 480 637Q463 637 445 637T416 636T404 636Q391 635 386 627Q384 621 367 550T332 412T314 344Q314 342 395 342H407H430Q542 342 590 392Q617 419 631 471T645 554Z"></path></g><g data-mml-node="mo" transform="translate(751,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(1140,0)"><path data-c="1D435" d="M231 637Q204 637 199 638T194 649Q194 676 205 682Q206 683 335 683Q594 683 608 681Q671 671 713 636T756 544Q756 480 698 429T565 360L555 357Q619 348 660 311T702 219Q702 146 630 78T453 1Q446 0 242 0Q42 0 39 2Q35 5 35 10Q35 17 37 24Q42 43 47 45Q51 46 62 46H68Q95 46 128 49Q142 52 147 61Q150 65 219 339T288 628Q288 635 231 637ZM649 544Q649 574 634 600T585 634Q578 636 493 637Q473 637 451 637T416 636H403Q388 635 384 626Q382 622 352 506Q352 503 351 500L320 374H401Q482 374 494 376Q554 386 601 434T649 544ZM595 229Q595 273 572 302T512 336Q506 337 429 337Q311 337 310 336Q310 334 293 263T258 122L240 52Q240 48 252 48T333 46Q422 46 429 47Q491 54 543 105T595 229Z"></path></g><g data-mml-node="mo" transform="translate(2176.8,0)"><path data-c="2223" d="M139 -249H137Q125 -249 119 -235V251L120 737Q130 750 139 750Q152 750 159 735V-235Q151 -249 141 -249H139Z"></path></g><g data-mml-node="mi" transform="translate(2732.6,0)"><path data-c="1D434" d="M208 74Q208 50 254 46Q272 46 272 35Q272 34 270 22Q267 8 264 4T251 0Q249 0 239 0T205 1T141 2Q70 2 50 0H42Q35 7 35 11Q37 38 48 46H62Q132 49 164 96Q170 102 345 401T523 704Q530 716 547 716H555H572Q578 707 578 706L606 383Q634 60 636 57Q641 46 701 46Q726 46 726 36Q726 34 723 22Q720 7 718 4T704 0Q701 0 690 0T651 1T578 2Q484 2 455 0H443Q437 6 437 9T439 27Q443 40 445 43L449 46H469Q523 49 533 63L521 213H283L249 155Q208 86 208 74ZM516 260Q516 271 504 416T490 562L463 519Q447 492 400 412L310 260L413 259Q516 259 516 260Z"></path></g><g data-mml-node="mo" transform="translate(3482.6,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="mi" transform="translate(3871.6,0)"><path data-c="1D443" d="M287 628Q287 635 230 637Q206 637 199 638T192 648Q192 649 194 659Q200 679 203 681T397 683Q587 682 600 680Q664 669 707 631T751 530Q751 453 685 389Q616 321 507 303Q500 302 402 301H307L277 182Q247 66 247 59Q247 55 248 54T255 50T272 48T305 46H336Q342 37 342 35Q342 19 335 5Q330 0 319 0Q316 0 282 1T182 2Q120 2 87 2T51 1Q33 1 33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM645 554Q645 567 643 575T634 597T609 619T560 635Q553 636 480 637Q463 637 445 637T416 636T404 636Q391 635 386 627Q384 621 367 550T332 412T314 344Q314 342 395 342H407H430Q542 342 590 392Q617 419 631 471T645 554Z"></path></g><g data-mml-node="mo" transform="translate(4622.6,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="msub" transform="translate(5011.6,0)"><g data-mml-node="mi"><path data-c="1D434" d="M208 74Q208 50 254 46Q272 46 272 35Q272 34 270 22Q267 8 264 4T251 0Q249 0 239 0T205 1T141 2Q70 2 50 0H42Q35 7 35 11Q37 38 48 46H62Q132 49 164 96Q170 102 345 401T523 704Q530 716 547 716H555H572Q578 707 578 706L606 383Q634 60 636 57Q641 46 701 46Q726 46 726 36Q726 34 723 22Q720 7 718 4T704 0Q701 0 690 0T651 1T578 2Q484 2 455 0H443Q437 6 437 9T439 27Q443 40 445 43L449 46H469Q523 49 533 63L521 213H283L249 155Q208 86 208 74ZM516 260Q516 271 504 416T490 562L463 519Q447 492 400 412L310 260L413 259Q516 259 516 260Z"></path></g><g data-mml-node="mi" transform="translate(783,-150) scale(0.707)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g></g><g data-mml-node="mo" transform="translate(6088.5,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g><g data-mml-node="mrow" transform="translate(220,-749.6)"><g data-mml-node="munderover"><g data-mml-node="mo"><path data-c="2211" d="M61 748Q64 750 489 750H913L954 640Q965 609 976 579T993 533T999 516H979L959 517Q936 579 886 621T777 682Q724 700 655 705T436 710H319Q183 710 183 709Q186 706 348 484T511 259Q517 250 513 244L490 216Q466 188 420 134T330 27L149 -187Q149 -188 362 -188Q388 -188 436 -188T506 -189Q679 -189 778 -162T936 -43Q946 -27 959 6H999L913 -249L489 -250Q65 -250 62 -248Q56 -246 56 -239Q56 -234 118 -161Q186 -81 245 -11L428 206Q428 207 242 462L57 717L56 728Q56 744 61 748Z"></path></g><g data-mml-node="TeXAtom" transform="translate(1089,477.1) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g></g><g data-mml-node="TeXAtom" transform="translate(1089,-285.4) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D457" d="M297 596Q297 627 318 644T361 661Q378 661 389 651T403 623Q403 595 384 576T340 557Q322 557 310 567T297 596ZM288 376Q288 405 262 405Q240 405 220 393T185 362T161 325T144 293L137 279Q135 278 121 278H107Q101 284 101 286T105 299Q126 348 164 391T252 441Q253 441 260 441T272 442Q296 441 316 432Q341 418 354 401T367 348V332L318 133Q267 -67 264 -75Q246 -125 194 -164T75 -204Q25 -204 7 -183T-12 -137Q-12 -110 7 -91T53 -71Q70 -71 82 -81T95 -112Q95 -148 63 -167Q69 -168 77 -168Q111 -168 139 -140T182 -74L193 -32Q204 11 219 72T251 197T278 308T289 365Q289 372 288 376Z"></path></g><g data-mml-node="mo" transform="translate(412,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(1190,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g></g><g data-mml-node="mi" transform="translate(2500.7,0)"><path data-c="1D443" d="M287 628Q287 635 230 637Q206 637 199 638T192 648Q192 649 194 659Q200 679 203 681T397 683Q587 682 600 680Q664 669 707 631T751 530Q751 453 685 389Q616 321 507 303Q500 302 402 301H307L277 182Q247 66 247 59Q247 55 248 54T255 50T272 48T305 46H336Q342 37 342 35Q342 19 335 5Q330 0 319 0Q316 0 282 1T182 2Q120 2 87 2T51 1Q33 1 33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM645 554Q645 567 643 575T634 597T609 619T560 635Q553 636 480 637Q463 637 445 637T416 636T404 636Q391 635 386 627Q384 621 367 550T332 412T314 344Q314 342 395 342H407H430Q542 342 590 392Q617 419 631 471T645 554Z"></path></g><g data-mml-node="mo" transform="translate(3251.7,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="msub" transform="translate(3640.7,0)"><g data-mml-node="mi"><path data-c="1D434" d="M208 74Q208 50 254 46Q272 46 272 35Q272 34 270 22Q267 8 264 4T251 0Q249 0 239 0T205 1T141 2Q70 2 50 0H42Q35 7 35 11Q37 38 48 46H62Q132 49 164 96Q170 102 345 401T523 704Q530 716 547 716H555H572Q578 707 578 706L606 383Q634 60 636 57Q641 46 701 46Q726 46 726 36Q726 34 723 22Q720 7 718 4T704 0Q701 0 690 0T651 1T578 2Q484 2 455 0H443Q437 6 437 9T439 27Q443 40 445 43L449 46H469Q523 49 533 63L521 213H283L249 155Q208 86 208 74ZM516 260Q516 271 504 416T490 562L463 519Q447 492 400 412L310 260L413 259Q516 259 516 260Z"></path></g><g data-mml-node="mi" transform="translate(783,-150) scale(0.707)"><path data-c="1D457" d="M297 596Q297 627 318 644T361 661Q378 661 389 651T403 623Q403 595 384 576T340 557Q322 557 310 567T297 596ZM288 376Q288 405 262 405Q240 405 220 393T185 362T161 325T144 293L137 279Q135 278 121 278H107Q101 284 101 286T105 299Q126 348 164 391T252 441Q253 441 260 441T272 442Q296 441 316 432Q341 418 354 401T367 348V332L318 133Q267 -67 264 -75Q246 -125 194 -164T75 -204Q25 -204 7 -183T-12 -137Q-12 -110 7 -91T53 -71Q70 -71 82 -81T95 -112Q95 -148 63 -167Q69 -168 77 -168Q111 -168 139 -140T182 -74L193 -32Q204 11 219 72T251 197T278 308T289 365Q289 372 288 376Z"></path></g></g><g data-mml-node="mo" transform="translate(4765,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="mi" transform="translate(5154,0)"><path data-c="1D443" d="M287 628Q287 635 230 637Q206 637 199 638T192 648Q192 649 194 659Q200 679 203 681T397 683Q587 682 600 680Q664 669 707 631T751 530Q751 453 685 389Q616 321 507 303Q500 302 402 301H307L277 182Q247 66 247 59Q247 55 248 54T255 50T272 48T305 46H336Q342 37 342 35Q342 19 335 5Q330 0 319 0Q316 0 282 1T182 2Q120 2 87 2T51 1Q33 1 33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM645 554Q645 567 643 575T634 597T609 619T560 635Q553 636 480 637Q463 637 445 637T416 636T404 636Q391 635 386 627Q384 621 367 550T332 412T314 344Q314 342 395 342H407H430Q542 342 590 392Q617 419 631 471T645 554Z"></path></g><g data-mml-node="mo" transform="translate(5905,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(6294,0)"><path data-c="1D435" d="M231 637Q204 637 199 638T194 649Q194 676 205 682Q206 683 335 683Q594 683 608 681Q671 671 713 636T756 544Q756 480 698 429T565 360L555 357Q619 348 660 311T702 219Q702 146 630 78T453 1Q446 0 242 0Q42 0 39 2Q35 5 35 10Q35 17 37 24Q42 43 47 45Q51 46 62 46H68Q95 46 128 49Q142 52 147 61Q150 65 219 339T288 628Q288 635 231 637ZM649 544Q649 574 634 600T585 634Q578 636 493 637Q473 637 451 637T416 636H403Q388 635 384 626Q382 622 352 506Q352 503 351 500L320 374H401Q482 374 494 376Q554 386 601 434T649 544ZM595 229Q595 273 572 302T512 336Q506 337 429 337Q311 337 310 336Q310 334 293 263T258 122L240 52Q240 48 252 48T333 46Q422 46 429 47Q491 54 543 105T595 229Z"></path></g><g data-mml-node="mo" transform="translate(7330.8,0)"><path data-c="2223" d="M139 -249H137Q125 -249 119 -235V251L120 737Q130 750 139 750Q152 750 159 735V-235Q151 -249 141 -249H139Z"></path></g><g data-mml-node="msub" transform="translate(7886.6,0)"><g data-mml-node="mi"><path data-c="1D434" d="M208 74Q208 50 254 46Q272 46 272 35Q272 34 270 22Q267 8 264 4T251 0Q249 0 239 0T205 1T141 2Q70 2 50 0H42Q35 7 35 11Q37 38 48 46H62Q132 49 164 96Q170 102 345 401T523 704Q530 716 547 716H555H572Q578 707 578 706L606 383Q634 60 636 57Q641 46 701 46Q726 46 726 36Q726 34 723 22Q720 7 718 4T704 0Q701 0 690 0T651 1T578 2Q484 2 455 0H443Q437 6 437 9T439 27Q443 40 445 43L449 46H469Q523 49 533 63L521 213H283L249 155Q208 86 208 74ZM516 260Q516 271 504 416T490 562L463 519Q447 492 400 412L310 260L413 259Q516 259 516 260Z"></path></g><g data-mml-node="mi" transform="translate(783,-150) scale(0.707)"><path data-c="1D457" d="M297 596Q297 627 318 644T361 661Q378 661 389 651T403 623Q403 595 384 576T340 557Q322 557 310 567T297 596ZM288 376Q288 405 262 405Q240 405 220 393T185 362T161 325T144 293L137 279Q135 278 121 278H107Q101 284 101 286T105 299Q126 348 164 391T252 441Q253 441 260 441T272 442Q296 441 316 432Q341 418 354 401T367 348V332L318 133Q267 -67 264 -75Q246 -125 194 -164T75 -204Q25 -204 7 -183T-12 -137Q-12 -110 7 -91T53 -71Q70 -71 82 -81T95 -112Q95 -148 63 -167Q69 -168 77 -168Q111 -168 139 -140T182 -74L193 -32Q204 11 219 72T251 197T278 308T289 365Q289 372 288 376Z"></path></g></g><g data-mml-node="mo" transform="translate(9010.9,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g><rect width="9599.9" height="60" x="120" y="220"></rect></g></g></g></svg></mjx-container></p>
+<p>nia</p>
+]]></content>
+      <tags>
+        <tag>苏打绿</tag>
+        <tag>空气中的视听与幻觉</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【置顶】在markdown博客中插入视频/音频/网页</title>
+    <url>/2023/04/11/video&amp;audio/</url>
+    <content><![CDATA[<h1 id="如何在markdown博客中插入视频、音频链接"><a href="#如何在markdown博客中插入视频、音频链接" class="headerlink" title="如何在markdown博客中插入视频、音频链接"></a>如何在markdown博客中插入视频、音频链接</h1><p><img lazyload="" src="/images/loading.svg" data-src="/./FILES/video&audio.md/img-20230411121351.png" alt="Img"></p>
+<p><em>原因是想要开一个坑了，关于warma的创造力的书，感觉好好玩！（起重机魔芋）</em></p>
+<h2 id="外链视频"><a href="#外链视频" class="headerlink" title="外链视频"></a>外链视频</h2><p>视频链接：<a class="link" href="https://www.bilibili.com/video/BV1oM4y1y7Q4/?vd_source=06807ee57b3378a0f2aaafdb5478e92d">【warma】我要写书啦！！！ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>苯人用的方法：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;iframe height="830" width="720" src="https://www.bilibili.com/video/BV1oM4y1y7Q4/?vd_source=06807ee57b3378a0f2aaafdb5478e92d" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"&gt; &lt;/iframe&gt;</span><br></pre></td></tr></table></figure></div>
+
+<p>参数可自行调节（滚动，边框等等），效果如下：</p>
+<iframe height="830" width="720" src="https://www.bilibili.com/video/BV1oM4y1y7Q4/?vd_source=06807ee57b3378a0f2aaafdb5478e92d" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+<p>袜！成功辣！</p>
+<h2 id="本地视频"><a href="#本地视频" class="headerlink" title="本地视频"></a>本地视频</h2><p>苯人用的方法：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;video id="video" controls="" preload="none"&gt;</span><br><span class="line">    &lt;source id="mp4" src="/FILES/video&amp;audio.md/test.mp4" type="video/mp4"&gt;</span><br><span class="line">&lt;/video&gt;</span><br></pre></td></tr></table></figure></div>
+
+<p>将路径修改为本地路径即可，效果如下：</p>
+<video id="video" controls="" preload="none">
+    <source id="mp4" src="/FILES/video&audio.md/test.mp4" type="video/mp4">
+</video>
+
+<h2 id="嵌套网页"><a href="#嵌套网页" class="headerlink" title="嵌套网页"></a>嵌套网页</h2><p>苯人用的方法：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;iframe  </span><br><span class="line">height=900 </span><br><span class="line">width=50% </span><br><span class="line">src="https://liebe-grausam.github.io/"  </span><br><span class="line">frameborder=0  </span><br><span class="line">allowfullscreen&gt;</span><br><span class="line">&lt;/iframe&gt;</span><br></pre></td></tr></table></figure></div>
+
+<iframe height="900" width="50%" src="https://liebe-grausam.github.io/" frameborder="0" allowfullscreen="">
+</iframe>
+
+<h2 id="插入音频"><a href="#插入音频" class="headerlink" title="插入音频"></a>插入音频</h2><p>苯人用的方法：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&amp;id=33367876&amp;auto=1&amp;height=66"&gt;&lt;/iframe&gt;</span><br></pre></td></tr></table></figure></div>
+
+<p>其中链接可以去网易云的网页版生成外链（但好像很多歌都有版权保护orz），效果如下：</p>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=33367876&auto=1&height=66"></iframe>
+]]></content>
+      <tags>
+        <tag>Technology</tag>
+        <tag>Compass</tag>
+        <tag>markdown</tag>
+      </tags>
+  </entry>
+</search>
